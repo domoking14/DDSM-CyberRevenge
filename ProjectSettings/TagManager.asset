@@ -3,7 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Block
+  - PlacedBlock
+  - Wall
+  - Platform
+  - Ground
+  - BlockSpawn
+  - SpawnZone
+  - SpawnOne
+  - PlatformZone
+  - SpawnTWO
+  - SpawnTHREE
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
