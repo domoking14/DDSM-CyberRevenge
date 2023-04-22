@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public static PlayerMove PM;
+
     //For Player 
     Rigidbody2D pb;
     SpriteRenderer sr;
@@ -18,6 +20,7 @@ public class PlayerMove : MonoBehaviour
     private bool playGround, playPlat, doubleJump, isMove;
     public bool canMove; 
     public bool canSpawn = false;
+    public Transform spawnPoint;
 
     //For Dash Jump
     private bool canDash;
@@ -25,8 +28,10 @@ public class PlayerMove : MonoBehaviour
 
     public GameObject _BlockSpawn;
     private BlockSpawn BLS;
+    
 
-    public Transform spawnPoint;
+    //public Transform _MoveGrid;
+    
     void Awake()
     {
         pb = GetComponent<Rigidbody2D>();
@@ -143,6 +148,11 @@ public class PlayerMove : MonoBehaviour
         canDash = true;
     }
 
+    void Respawn()
+    {
+        transform.position = spawnPoint.position;
+    }
+
     void WhatPlayerDo()
     {
         if(playGround || playPlat && canSpawn)
@@ -168,9 +178,8 @@ public class PlayerMove : MonoBehaviour
     void CheckBlockSpawn()
     {
         _BlockSpawn = GameObject.FindGameObjectWithTag("BlockSpawn");
-        BLS = _BlockSpawn.GetComponent<BlockSpawn>();  
+        BLS = _BlockSpawn.GetComponent<BlockSpawn>();
     }
-
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.transform.CompareTag("Ground"))
@@ -202,6 +211,15 @@ public class PlayerMove : MonoBehaviour
             vel.y = 0;
             anim.SetBool("Grounded", true);
         }
+
+        if (col.transform.CompareTag("DeathFloor"))
+        {
+            Respawn();
+        }
+        if (col.transform.CompareTag("DeathBlocks"))
+        {
+            Respawn();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -212,7 +230,6 @@ public class PlayerMove : MonoBehaviour
             BLS.spawnOne = true;
             BLS.spawnTwo = false;
             BLS.spawnThree = false;
-            //CheckBlockSpawn();
         }
         if (collision.transform.CompareTag("SpawnTWO"))
         {
@@ -220,15 +237,13 @@ public class PlayerMove : MonoBehaviour
             BLS.spawnOne = false;
             BLS.spawnTwo = true;
             BLS.spawnThree = false;
-            //CheckBlockSpawn();
         }
         if (collision.transform.CompareTag("SpawnTHREE"))
         {
             canSpawn = true;
             BLS.spawnOne = false;
             BLS.spawnTwo = false;
-            BLS.spawnThree = true;
-            //CheckBlockSpawn();
+            BLS.spawnThree = false;
         }
 
         if (collision.transform.CompareTag("PlatformZone"))
@@ -244,5 +259,13 @@ public class PlayerMove : MonoBehaviour
             spawnPoint = collision.transform;
             GameManager.GM.SetSpawnPoint(collision.transform);
         }
+        /*
+        if (collision.transform.CompareTag("SpawnGrids"))
+        {
+            canSpawn = true;
+            //_MoveGrid = collision.transform;
+            //GameManager.GM.SetGrid(collision.transform);
+        }
+        */
     }
 }

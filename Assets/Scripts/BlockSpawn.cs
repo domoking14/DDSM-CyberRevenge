@@ -15,6 +15,14 @@ public class BlockSpawn : MonoBehaviour
     
     public Transform Spawner;
 
+    /*
+    public Transform Grid;
+    private Collider2D GridBounds;
+    public Vector3 gridMinVec;
+    public int gridWidth, gridHeight;
+    public Transform[,] TESTgrid;
+    */
+
     //Simiar to the gameobjects, Add a coresponiding bool simialr to the ones on the bottom [You can move to the WhatSpawner Method Now] 
     public bool spawnOne, spawnTwo, spawnThree;
     
@@ -173,15 +181,31 @@ public class BlockSpawn : MonoBehaviour
         }
     }
 
+    /*
+    public void SetBlockGrid()
+    {
+        if (Grid != null)
+        {
+            gridWidth = System.Convert.ToInt32(Grid.localScale.x);
+            gridHeight = System.Convert.ToInt32(Grid.localScale.y);
+
+            GridBounds = Grid.GetComponent<Collider2D>();
+            gridMinVec = GridBounds.bounds.min;
+            TESTgrid = new Transform[gridWidth, gridHeight];
+        }
+    }
+    */
 
     public void WhatSpawner()
     {
-        if (spawnOne)
+        if (spawnOne && PM.canSpawn)
         {
             firstSpawn.SetActive(true);
             secondSpawn.SetActive(false);
             thridSpawn.SetActive(false);
             Spawner = firstSpawn.transform;
+            //Grid = PM._MoveGrid;
+            //SetBlockGrid();
         }
         if (spawnTwo)
         {

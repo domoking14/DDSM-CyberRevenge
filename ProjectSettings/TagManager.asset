@@ -16,6 +16,7 @@ TagManager:
   - SpawnTWO
   - SpawnTHREE
   - SpawnPoint
+  - DeathFloor
   layers:
   - Default
   - TransparentFX
@@ -23,9 +24,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Block Spawn
+  - Block Layer
+  - Grids
   - 
   - 
   - 
