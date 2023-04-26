@@ -115,7 +115,7 @@ public class NewBlockMove : MonoBehaviour
     {
         if (Quaternion.Angle(transform.rotation, movePoint.rotation) <= .02f)
         {
-            if (Mathf.Abs(Input.GetAxisRaw("Rotate")) == 1)
+            if (Mathf.Abs(Input.GetAxisRaw("Rotate")) == 1 && canMove)
             {
                 movePoint.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), 90);
                /*
@@ -151,8 +151,9 @@ public class NewBlockMove : MonoBehaviour
             Destroy(rb);
             gameObject.layer = 0;
             gameObject.tag = "PlacedBlock";
+            //BlockSpawn.BS.block = null;
             //AddToGrid();
-            
+
             //CheckForLines();
         }
 
@@ -161,6 +162,7 @@ public class NewBlockMove : MonoBehaviour
             Destroy(gameObject);
             //print("This works??");
             gameObject.tag = "PlacedBlock";
+            //BlockSpawn.BS.block = null;
         }
 
         else if (collision.transform.CompareTag("PlacedBlock"))
@@ -172,6 +174,7 @@ public class NewBlockMove : MonoBehaviour
             Destroy(rb);
             gameObject.layer = 0;
             gameObject.tag = "PlacedBlock";
+            //BlockSpawn.BS.block = null;
             //AddToGrid();
             //CheckForLines();
         }
@@ -185,6 +188,7 @@ public class NewBlockMove : MonoBehaviour
             Destroy(rb);
             gameObject.layer = 0;
             gameObject.tag = "PlacedBlock";
+            //BlockSpawn.BS.block = null;
         }
         else if (collision.transform.CompareTag("Platform"))
         {

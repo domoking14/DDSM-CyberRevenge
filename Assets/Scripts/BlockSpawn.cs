@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class BlockSpawn : MonoBehaviour
 {
     public static BlockSpawn BS;
+    public CinemachineVirtualCamera vCam;
 
     //Add more Spawners if you need... Copy/Paste with a numbered name + Spawn
     public GameObject firstSpawn;
@@ -64,6 +66,7 @@ public class BlockSpawn : MonoBehaviour
     {
         RandomLoad();
         PM = _PlayerMove.GetComponent<PlayerMove>();
+        var vCam = GetComponent<CinemachineVirtualCamera>();
     }
 
     // Update is called once per frame
@@ -83,6 +86,7 @@ public class BlockSpawn : MonoBehaviour
             var PlayableBlock = Instantiate(blockLand[rand], firstSpawn.transform.position, Quaternion.identity) as GameObject;
             blockSpawnLim++;
             block = PlayableBlock;
+            vCam.Follow = PlayableBlock.transform;
             PlayedBlocks.Add(PlayableBlock);
         }
         if (spawnTwo)
@@ -93,6 +97,8 @@ public class BlockSpawn : MonoBehaviour
                 Object[] test = playerBlocks.ToArray();
                 var PlayableBlock = Instantiate(test[rand], secondSpawn.transform.position, Quaternion.identity) as GameObject;
                 blockSpawnLim++;
+                block = PlayableBlock;
+                vCam.Follow = PlayableBlock.transform;
                 PlayedBlocks.Add(PlayableBlock);
             }
         }
@@ -104,6 +110,8 @@ public class BlockSpawn : MonoBehaviour
                 Object[] test = playerBlocks.ToArray();
                 var PlayableBlock = Instantiate(test[rand], secondSpawn.transform.position, Quaternion.identity) as GameObject;
                 blockSpawnLim++;
+                block = PlayableBlock;
+                vCam.Follow = PlayableBlock.transform;
                 PlayedBlocks.Add(PlayableBlock);
             }
         }
@@ -178,6 +186,7 @@ public class BlockSpawn : MonoBehaviour
             startSpawn = false;
             playerMove = true;
             WhatSpawner();
+            vCam.Follow = _PlayerMove.transform;
         }
     }
 
