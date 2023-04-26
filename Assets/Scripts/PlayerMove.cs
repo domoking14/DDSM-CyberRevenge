@@ -21,7 +21,7 @@ public class PlayerMove : MonoBehaviour
     public bool canMove; 
     public bool canSpawn = false;
     public Transform spawnPoint;
-
+    public int playerLives = 3;
     //For Dash Jump
     private bool canDash;
     public float dashTime, dashSpeed, dashJumpIncrease, timeBTWDashes;
@@ -111,6 +111,18 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (UIManager.UIM.gameState == 0)
+            {
+                UIManager.UIM.gameState = 1;
+            }
+            else
+            {
+                print("Can't Pause Right Now");
+            }
+        }
+
         CheckBlockSpawn();
         WhatPlayerDo();
         anim.SetFloat("XMove", vel.x);
@@ -150,7 +162,16 @@ public class PlayerMove : MonoBehaviour
 
     void Respawn()
     {
-        transform.position = spawnPoint.position;
+        if(playerLives >= 0)
+        {
+            UIManager.UIM.gameState = 3;
+        }
+        else if(playerLives < 0)
+        {
+            UIManager.UIM.UpdateLives(playerLives);
+            transform.position = spawnPoint.position;
+        }
+        
     }
 
     void WhatPlayerDo()
@@ -214,10 +235,12 @@ public class PlayerMove : MonoBehaviour
 
         if (col.transform.CompareTag("DeathFloor"))
         {
+            playerLives--;
             Respawn();
         }
         if (col.transform.CompareTag("DeathBlocks"))
         {
+            playerLives--;
             Respawn();
         }
     }
@@ -258,6 +281,11 @@ public class PlayerMove : MonoBehaviour
         {
             spawnPoint = collision.transform;
             GameManager.GM.SetSpawnPoint(collision.transform);
+        }
+
+        if (collision.transform.CompareTag("Finish"))
+        {
+            UIManager.UIM.gameState = 2;
         }
         /*
         if (collision.transform.CompareTag("SpawnGrids"))
