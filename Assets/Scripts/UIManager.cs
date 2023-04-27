@@ -119,23 +119,24 @@ public class UIManager : MonoBehaviour
                     Time.timeScale = 0;
                     break;
             }
-
-            if (OnMenu)
+        }
+        if (OnMenu)
+        {
+            switch (gameState)
             {
-                switch (gameState)
-                {
-                    case 0:
-                        ShowMainMenu();
-                        HideLVselect();
-                        curState = GameStates[0];
-                        break;
-                    
-                    case 1:
-                        HideMainMenu();
-                        ShowLVselect();
-                        curState = GameStates[1];
-                        break;
-                }
+                case 0:
+                    ShowMainMenu();
+                    HideLVselect();
+                    curState = GameStates[0];
+                    prevState = 0;
+                    break;
+
+                case 1:
+                    HideMainMenu();
+                    ShowLVselect();
+                    curState = GameStates[1];
+                    prevState = 1;
+                    break;
             }
         }
     }
