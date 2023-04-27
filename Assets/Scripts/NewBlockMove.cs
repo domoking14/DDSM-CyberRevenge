@@ -11,6 +11,10 @@ public class NewBlockMove : MonoBehaviour
     public Transform movePoint;
     public Vector3 rotationPoint;
 
+    public int soundIndex;
+    public AudioSource bSource;
+    public AudioClip[] landSounds;
+
     //Move Authentic Tetris Falling Movement
     private float previousTime;
     public float fallTime = 0.8f;
@@ -151,6 +155,11 @@ public class NewBlockMove : MonoBehaviour
             Destroy(rb);
             gameObject.layer = 0;
             gameObject.tag = "PlacedBlock";
+
+            int Rand = UnityEngine.Random.Range(0, landSounds.Length);
+            bSource.clip = landSounds[Rand];
+            bSource.Play();
+
             //BlockSpawn.BS.block = null;
             //AddToGrid();
 
@@ -174,6 +183,9 @@ public class NewBlockMove : MonoBehaviour
             Destroy(rb);
             gameObject.layer = 0;
             gameObject.tag = "PlacedBlock";
+            int Rand = UnityEngine.Random.Range(0, landSounds.Length);
+            bSource.clip = landSounds[Rand];
+            bSource.Play();
             //BlockSpawn.BS.block = null;
             //AddToGrid();
             //CheckForLines();
@@ -188,6 +200,9 @@ public class NewBlockMove : MonoBehaviour
             Destroy(rb);
             gameObject.layer = 0;
             gameObject.tag = "PlacedBlock";
+            int Rand = UnityEngine.Random.Range(0, landSounds.Length);
+            bSource.clip = landSounds[Rand];
+            bSource.Play();
             //BlockSpawn.BS.block = null;
         }
         else if (collision.transform.CompareTag("Platform"))
@@ -198,6 +213,16 @@ public class NewBlockMove : MonoBehaviour
             Destroy(rb);
             gameObject.layer = 0;
             gameObject.tag = "PlacedBlock";
+            int Rand = UnityEngine.Random.Range(0, landSounds.Length);
+            bSource.clip = landSounds[Rand];
+            bSource.Play();
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Barrier"))
+        {
+            Destroy(gameObject);
         }
     }
 

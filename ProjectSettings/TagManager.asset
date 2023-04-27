@@ -17,6 +17,13 @@ TagManager:
   - SpawnTHREE
   - SpawnPoint
   - DeathFloor
+  - ShowOnPause
+  - ShowOnComplete
+  - ShowOnFail
+  - DeathBlocks
+  - Barrier
+  - SpawnFIVE
+  - SpawnFOUR
   layers:
   - Default
   - TransparentFX

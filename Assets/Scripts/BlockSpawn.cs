@@ -14,6 +14,8 @@ public class BlockSpawn : MonoBehaviour
     public GameObject firstSpawn;
     public GameObject secondSpawn;
     public GameObject thridSpawn;
+    public GameObject fourthSpawn;
+    public GameObject fifthSpawn;
     
     public Transform Spawner;
 
@@ -26,7 +28,7 @@ public class BlockSpawn : MonoBehaviour
     */
 
     //Simiar to the gameobjects, Add a coresponiding bool simialr to the ones on the bottom [You can move to the WhatSpawner Method Now] 
-    public bool spawnOne, spawnTwo, spawnThree;
+    public bool spawnOne, spawnTwo, spawnThree, spawnFour, spawnFive;
     
 
     public List<Object> testBlocks = new List<Object>();
@@ -108,7 +110,33 @@ public class BlockSpawn : MonoBehaviour
             {
                 int rand = Random.Range(0, playerBlocks.Count);
                 Object[] test = playerBlocks.ToArray();
-                var PlayableBlock = Instantiate(test[rand], secondSpawn.transform.position, Quaternion.identity) as GameObject;
+                var PlayableBlock = Instantiate(test[rand], thridSpawn.transform.position, Quaternion.identity) as GameObject;
+                blockSpawnLim++;
+                block = PlayableBlock;
+                vCam.Follow = PlayableBlock.transform;
+                PlayedBlocks.Add(PlayableBlock);
+            }
+        }
+        if (spawnFour)
+        {
+            if (Input.GetKeyDown(KeyCode.Q) && blockSpawnLim == blockSpawnOG && spawnDAblocks)
+            {
+                int rand = Random.Range(0, playerBlocks.Count);
+                Object[] test = playerBlocks.ToArray();
+                var PlayableBlock = Instantiate(test[rand], fourthSpawn.transform.position, Quaternion.identity) as GameObject;
+                blockSpawnLim++;
+                block = PlayableBlock;
+                vCam.Follow = PlayableBlock.transform;
+                PlayedBlocks.Add(PlayableBlock);
+            }
+        }
+        if (spawnFive)
+        {
+            if (Input.GetKeyDown(KeyCode.Q) && blockSpawnLim == blockSpawnOG && spawnDAblocks)
+            {
+                int rand = Random.Range(0, playerBlocks.Count);
+                Object[] test = playerBlocks.ToArray();
+                var PlayableBlock = Instantiate(test[rand], fifthSpawn.transform.position, Quaternion.identity) as GameObject;
                 blockSpawnLim++;
                 block = PlayableBlock;
                 vCam.Follow = PlayableBlock.transform;
@@ -127,6 +155,7 @@ public class BlockSpawn : MonoBehaviour
         if(startSpawn && playerMove)
         {
             NoSpawn();
+            vCam.Follow = _PlayerMove.transform;
         }
     }
 
@@ -212,6 +241,8 @@ public class BlockSpawn : MonoBehaviour
             firstSpawn.SetActive(true);
             secondSpawn.SetActive(false);
             thridSpawn.SetActive(false);
+            fourthSpawn.SetActive(false);
+            fifthSpawn.SetActive(false);
             Spawner = firstSpawn.transform;
             //Grid = PM._MoveGrid;
             //SetBlockGrid();
@@ -221,6 +252,8 @@ public class BlockSpawn : MonoBehaviour
             firstSpawn.SetActive(false);
             secondSpawn.SetActive(true);
             thridSpawn.SetActive(false);
+            fourthSpawn.SetActive(false);
+            fifthSpawn.SetActive(false);
             Spawner = secondSpawn.transform;
         }
         if (spawnThree)
@@ -228,8 +261,28 @@ public class BlockSpawn : MonoBehaviour
             firstSpawn.SetActive(false);
             secondSpawn.SetActive(false);
             thridSpawn.SetActive(true);
+            fourthSpawn.SetActive(false);
+            fifthSpawn.SetActive(false);
             Spawner = thridSpawn.transform;
         }
+        if (spawnFour)
+        {
+            firstSpawn.SetActive(false);
+            secondSpawn.SetActive(false);
+            thridSpawn.SetActive(false);
+            fourthSpawn.SetActive(true);
+            Spawner = fourthSpawn.transform;
+        }
+        if (spawnFive)
+        {
+            firstSpawn.SetActive(false);
+            secondSpawn.SetActive(false);
+            thridSpawn.SetActive(false);
+            fourthSpawn.SetActive(false);
+            fifthSpawn.SetActive(true);
+            Spawner = fifthSpawn.transform;
+        }
+
     }
 
     public void RandomLoad()

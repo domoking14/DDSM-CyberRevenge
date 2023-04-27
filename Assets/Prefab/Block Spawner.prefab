@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 71
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &61925289584730668
 BoxCollider2D:
@@ -71,29 +71,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 329fc94c3497ecc4883548cb9f3893b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vCam: {fileID: 0}
   firstSpawn: {fileID: 0}
   secondSpawn: {fileID: 0}
   thridSpawn: {fileID: 1962178677757002}
-  Spawner: {fileID: 4628797745647158}
-  spawnPointVal: 0
+  fourthSpawn: {fileID: 0}
+  fifthSpawn: {fileID: 0}
+  Spawner: {fileID: 0}
+  spawnOne: 0
+  spawnTwo: 0
+  spawnThree: 0
+  spawnFour: 0
+  spawnFive: 0
   testBlocks:
-  - {fileID: 1748674704215148, guid: e255d1b7e1baa7445a73107ee3b868bd, type: 3}
-  - {fileID: 1853512182872238, guid: d724728d7340b904e9e4eb8581539031, type: 3}
-  - {fileID: 1002105393337208, guid: 973f787fec6ac524086bddd655daebe1, type: 3}
-  - {fileID: 1702329546657956, guid: 5444d9d3ea57fa544a4e42615523b9f3, type: 3}
-  - {fileID: 1002105393337208, guid: 973f787fec6ac524086bddd655daebe1, type: 3}
-  - {fileID: 1572885691226518, guid: bae5021aaebb7c148ac6dfad24c11882, type: 3}
-  - {fileID: 1287631874050262, guid: 5471c3ad617632947ae9a13ce883a1a0, type: 3}
+  - {fileID: 7161668411188573420, guid: 2346de1af27db42479875bda41a431c0, type: 3}
+  - {fileID: 8146640151002261561, guid: 62f6bf797274d7d4b8a6022c061b27f9, type: 3}
+  - {fileID: 4813668665049881741, guid: a7f5755d89b6cd3418b380bc0a47e170, type: 3}
+  - {fileID: 7438722282298261866, guid: 762a4f2648aa47c458ebaf0c867c1eb4, type: 3}
+  - {fileID: 4994652211932296485, guid: 0c8f1902437933c489e3b2c1630ab91e, type: 3}
+  - {fileID: 2691601076396380632, guid: 249372e4d65a62c4fb772e15c6752355, type: 3}
+  - {fileID: 3320692159148927635, guid: 702e9009caecfb846b1019ceca2a3562, type: 3}
   playerBlocks: []
   PlayedBlocks: []
   block: {fileID: 0}
-  SquareBlock: {fileID: 1748674704215148, guid: e255d1b7e1baa7445a73107ee3b868bd, type: 3}
-  ZblockL: {fileID: 1853512182872238, guid: d724728d7340b904e9e4eb8581539031, type: 3}
-  ZblockR: {fileID: 1002105393337208, guid: 973f787fec6ac524086bddd655daebe1, type: 3}
-  LblockR: {fileID: 1486345879593476, guid: f362d213297996849bd3f0effc9892e1, type: 3}
-  LblockL: {fileID: 1572885691226518, guid: bae5021aaebb7c148ac6dfad24c11882, type: 3}
-  LineBlock: {fileID: 1702329546657956, guid: 5444d9d3ea57fa544a4e42615523b9f3, type: 3}
-  Tblock: {fileID: 1287631874050262, guid: 5471c3ad617632947ae9a13ce883a1a0, type: 3}
+  SquareBlock: {fileID: 7161668411188573420, guid: 2346de1af27db42479875bda41a431c0, type: 3}
+  ZblockL: {fileID: 8146640151002261561, guid: 62f6bf797274d7d4b8a6022c061b27f9, type: 3}
+  ZblockR: {fileID: 4813668665049881741, guid: a7f5755d89b6cd3418b380bc0a47e170, type: 3}
+  LblockR: {fileID: 4994652211932296485, guid: 0c8f1902437933c489e3b2c1630ab91e, type: 3}
+  LblockL: {fileID: 2691601076396380632, guid: 249372e4d65a62c4fb772e15c6752355, type: 3}
+  LineBlock: {fileID: 7438722282298261866, guid: 762a4f2648aa47c458ebaf0c867c1eb4, type: 3}
+  Tblock: {fileID: 3320692159148927635, guid: 702e9009caecfb846b1019ceca2a3562, type: 3}
   blockSpawnLim: 0
   blockSpawnOG: 0
   blockSpawnMax: 1

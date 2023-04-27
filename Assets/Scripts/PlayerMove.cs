@@ -26,6 +26,14 @@ public class PlayerMove : MonoBehaviour
     private bool canDash;
     public float dashTime, dashSpeed, dashJumpIncrease, timeBTWDashes;
 
+
+    public int soundIndex;
+    public AudioSource pSource;
+    public AudioClip[] jumpSounds;
+    public AudioClip[] landSounds;
+    public AudioClip[] deathSound;
+    public AudioClip[] dashSound;
+
     public GameObject _BlockSpawn;
     private BlockSpawn BLS;
     
@@ -138,6 +146,17 @@ public class PlayerMove : MonoBehaviour
         playPlat = false;
         anim.SetBool("Grounded", false);
         anim.SetFloat("Jumps", jumpVal);
+
+        if(soundIndex <jumpSounds.Length - 1)
+        {
+            soundIndex++;
+        }
+        else
+        {
+            soundIndex = 0;
+        }
+        pSource.clip = jumpSounds[soundIndex];
+        pSource.Play();
     }
 
     void DashAblility()
@@ -145,6 +164,16 @@ public class PlayerMove : MonoBehaviour
         if (canDash)
         {
             StartCoroutine(Dash());
+            if(soundIndex < dashSound.Length - 1)
+            {
+                soundIndex++;
+            }
+            else
+            {
+                soundIndex = 0;
+            }
+            pSource.clip = dashSound[soundIndex];
+            pSource.Play();
         }
     }
     
@@ -162,13 +191,26 @@ public class PlayerMove : MonoBehaviour
 
     void Respawn()
     {
-        if(playerLives >= 0)
+       
+        if (playerLives <= 0)
         {
             UIManager.UIM.gameState = 3;
         }
-        else if(playerLives < 0)
+        else if(playerLives > 0)
         {
+            if (soundIndex < deathSound.Length - 1)
+            {
+                soundIndex++;
+            }
+            else
+            {
+                soundIndex = 0;
+            }
+            pSource.clip = deathSound[soundIndex];
+            pSource.Play();
+            playerLives--;
             UIManager.UIM.UpdateLives(playerLives);
+            
             transform.position = spawnPoint.position;
         }
         
@@ -210,7 +252,11 @@ public class PlayerMove : MonoBehaviour
             maxJump = 2;
             jumpVal = 0;
             vel.y = 0;
-            anim.SetBool("Grounded", true); 
+            anim.SetBool("Grounded", true);
+
+            int Rand = Random.Range(0, landSounds.Length);
+            pSource.clip = landSounds[Rand];
+            pSource.Play();
         }
 
         if (col.transform.CompareTag("Platform"))
@@ -221,6 +267,10 @@ public class PlayerMove : MonoBehaviour
             jumpVal = 0;
             vel.y = 0;
             anim.SetBool("Grounded", true);
+
+            int Rand = Random.Range(0, landSounds.Length);
+            pSource.clip = landSounds[Rand];
+            pSource.Play();
         }
 
         if (col.transform.CompareTag("PlacedBlock") || col.transform.CompareTag("Block"))
@@ -231,16 +281,18 @@ public class PlayerMove : MonoBehaviour
             jumpVal = 0;
             vel.y = 0;
             anim.SetBool("Grounded", true);
+
+            int Rand = Random.Range(0, landSounds.Length);
+            pSource.clip = landSounds[Rand];
+            pSource.Play();
         }
 
         if (col.transform.CompareTag("DeathFloor"))
         {
-            playerLives--;
             Respawn();
         }
         if (col.transform.CompareTag("DeathBlocks"))
         {
-            playerLives--;
             Respawn();
         }
     }
@@ -253,6 +305,8 @@ public class PlayerMove : MonoBehaviour
             BLS.spawnOne = true;
             BLS.spawnTwo = false;
             BLS.spawnThree = false;
+            BLS.spawnFour = false;
+            BLS.spawnFive = false;
         }
         if (collision.transform.CompareTag("SpawnTWO"))
         {
@@ -260,13 +314,35 @@ public class PlayerMove : MonoBehaviour
             BLS.spawnOne = false;
             BLS.spawnTwo = true;
             BLS.spawnThree = false;
+            BLS.spawnFour = false;
+            BLS.spawnFive = false;
         }
         if (collision.transform.CompareTag("SpawnTHREE"))
         {
             canSpawn = true;
             BLS.spawnOne = false;
             BLS.spawnTwo = false;
+            BLS.spawnThree = true;
+            BLS.spawnFour = false;
+            BLS.spawnFive = false;
+        }
+        if (collision.transform.CompareTag("SpawnFOUR"))
+        {
+            canSpawn = true;
+            BLS.spawnOne = false;
+            BLS.spawnTwo = false;
             BLS.spawnThree = false;
+            BLS.spawnFour = true;
+            BLS.spawnFive = false;
+        }
+        if (collision.transform.CompareTag("SpawnFIVE"))
+        {
+            canSpawn = true;
+            BLS.spawnOne = false;
+            BLS.spawnTwo = false;
+            BLS.spawnThree = false;
+            BLS.spawnFour = false;
+            BLS.spawnFive = true;
         }
 
         if (collision.transform.CompareTag("PlatformZone"))
@@ -275,7 +351,10 @@ public class PlayerMove : MonoBehaviour
             BLS.spawnOne = false;
             BLS.spawnTwo = false;
             BLS.spawnThree = false;
+            BLS.spawnFour = false;
+            BLS.spawnFive = false;
         }
+
 
         if (collision.transform.CompareTag("SpawnPoint"))
         {
