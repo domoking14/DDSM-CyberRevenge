@@ -50,8 +50,8 @@ public class BlockSpawn : MonoBehaviour
     public int blockSpawnLim = 0;
     public int blockSpawnOG = 0;
     public int blockSpawnMax = 1;
-    public float blockTime = 2;
-    public float OGblockTime = 2;
+    public float blockTime = 5;
+    public float OGblockTime = 5;
     public float blockTimeCheck = 0;
     //private int blocksPlaced = 0;
     //private int blocksPlacedMX = 8;
