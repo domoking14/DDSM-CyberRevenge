@@ -48,10 +48,12 @@ public class GameMenu : MonoBehaviour
     {
         SceneManager.LoadScene("DA Level");
     }
+    /*
     public void Level3()
     {
         SceneManager.LoadScene("SD Level");
     }
+    */
 
     //quit game on button press
     public void ExitGame()

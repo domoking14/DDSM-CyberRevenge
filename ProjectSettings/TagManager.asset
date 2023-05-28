@@ -24,6 +24,8 @@ TagManager:
   - Barrier
   - SpawnFIVE
   - SpawnFOUR
+  - ShowOnMenu
+  - ShowOnLVselect
   layers:
   - Default
   - TransparentFX

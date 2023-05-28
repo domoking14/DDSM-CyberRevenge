@@ -241,7 +241,15 @@ public class PlayerMove : MonoBehaviour
     void CheckBlockSpawn()
     {
         _BlockSpawn = GameObject.FindGameObjectWithTag("BlockSpawn");
-        BLS = _BlockSpawn.GetComponent<BlockSpawn>();
+        if(_BlockSpawn != null)
+        {
+            BLS = _BlockSpawn.GetComponent<BlockSpawn>();
+        }
+        else
+        {
+            _BlockSpawn = null;
+            BLS = null;
+        }
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
@@ -295,6 +303,14 @@ public class PlayerMove : MonoBehaviour
         {
             Respawn();
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+            if (collision.transform.CompareTag("Finish"))
+            {
+                UIManager.UIM.gameState = 2;
+            }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
